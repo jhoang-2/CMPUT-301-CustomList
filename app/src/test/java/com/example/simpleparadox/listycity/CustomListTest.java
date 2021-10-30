@@ -2,6 +2,7 @@ package com.example.simpleparadox.listycity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,5 +29,15 @@ public class CustomListTest {
         assertFalse(list.hasCity(city));
         list.addCity(city);
         assertTrue(list.hasCity(city));
+    }
+    @Test
+    public void deleteCityTest() {
+        City city = new City("Toronto", "Ontario");
+        list.addCity(city);
+        list.delete(city);
+        assertFalse(list.hasCity(city));
+        assertThrows(IllegalArgumentException.class, () -> {
+            list.delete(city);
+        });
     }
 }
